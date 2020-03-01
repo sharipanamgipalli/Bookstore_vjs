@@ -2,6 +2,8 @@ url_books = "https://api.myjson.com/bins/zyv02";
 let data = [];
 let books = [];
 
+/*---Sending the Url and fetch the response--*/
+
 fetch(url_books)
   .then(response => {
     // console.log(response);
@@ -18,23 +20,22 @@ fetch(url_books)
   .catch(error => {
     console.log("Error occured" + error);
   });
-
+/*--Create the structure for books through js--*/
 function createBooks(books) {
   let book_row = document.getElementById("book_row");
   book_row.innerHTML = "";
   for (i = 0; i < books.length; i++) {
-    // console.log(books[i]);
     let flip_card = document.createElement("div");
     flip_card.setAttribute("class", "flip-card col-lg-3 col-md-4");
     book_row.appendChild(flip_card);
-    // console.log(flip_card);
+
     let div_flipCardInner = document.createElement("div");
     div_flipCardInner.setAttribute("class", "flip-card-inner");
     flip_card.appendChild(div_flipCardInner);
     let div_flipCardFront = document.createElement("div");
     div_flipCardFront.setAttribute("class", "flip-card-front");
     div_flipCardInner.appendChild(div_flipCardFront);
-    // console.log(flip_card);
+
     let book_image = document.createElement("img");
     book_image.setAttribute("class", "book-image");
     book_image.setAttribute("src", books[i].cover);
@@ -76,6 +77,7 @@ function createBooks(books) {
     });
   }
 }
+/*---Create search bar with and without button option--*/
 
 let term = null;
 // To search for a particulat text entered
@@ -89,15 +91,15 @@ let term = null;
 //   });
 // }
 function searchButton(books) {
-  let button_search = document.getElementById("searchButton");
-
-  button_search.addEventListener("click", function(e) {
+  //   let button_search = document.getElementById("searchButton");
+  let searchField = document.getElementById("searchField");
+  //   button_search.addEventListener("click", function(e)
+  searchField.addEventListener("keyup", function(e) {
     let searchedBooks = [];
     e.preventDefault();
     let searchField = document.getElementById("searchField");
     term = searchField.value.toUpperCase();
     console.log("term", searchField.value.toUpperCase());
-    console.log("hi");
     for (let i = 0; i < books.length; i++) {
       if (books[i].title.toUpperCase().includes(term)) {
         // console.log(books[i]);
